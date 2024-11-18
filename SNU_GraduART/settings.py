@@ -32,9 +32,9 @@ environ.Env.read_env(
 SECRET_KEY =env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'newgraduart-backend.fly.dev']
 
 # Application definition
 
@@ -177,6 +177,7 @@ FRONT_URL = env('FRONT_URL')
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "https://newgraduart-backend.fly.dev",
 ]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = [
@@ -187,3 +188,4 @@ CORS_ALLOW_HEADERS = [
     "x-csrftoken",
     "x-requested-with",
 ]
+CSRF_TRUSTED_ORIGINS = ['https://newgraduart-backend.fly.dev']
