@@ -76,7 +76,6 @@ def google_callback(request):
             samesite='None', 
             secure=True, 
             max_age=1800,
-            domain='graduart.gallery'
         )
         response.set_cookie(
             'refresh_token', 
@@ -85,7 +84,6 @@ def google_callback(request):
             samesite='None', 
             secure=True, 
             max_age=86400,
-            domain='graduart.gallery'
         )
         return response
     except:
@@ -114,7 +112,6 @@ def token_refresh(request):
             samesite='None', 
             secure=True, 
             max_age=1800,
-            domain='graduart.gallery'
         )
         return response
     except TokenError:
@@ -190,7 +187,6 @@ def register(request):
                 samesite='None', 
                 secure=True, 
                 max_age=1800,
-                domain='graduart.gallery'
             )
             response.set_cookie(
                 'refresh_token', 
@@ -199,7 +195,6 @@ def register(request):
                 samesite='None', 
                 secure=True, 
                 max_age=86400,
-                domain='graduart.gallery'
             )
             return response
         else:
@@ -242,7 +237,6 @@ def login(request):
             samesite='None', 
             secure=True, 
             max_age=1800,
-            domain='graduart.gallery'
         )
         response.set_cookie(
             'refresh_token', 
@@ -251,7 +245,6 @@ def login(request):
             samesite='None', 
             secure=True, 
             max_age=86400,
-            domain='graduart.gallery'
         )
         return response
     except:
