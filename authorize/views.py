@@ -254,17 +254,34 @@ def login(request):
 def logout(request):
     try:
         refresh_token = request.COOKIES.get('refresh_token')
-        if refresh_token:
+        if not refresh_token:
+            return Response({
+                'error': '로그아웃 중 오류가 발생했습니다.',
+                'detail': 'refresh_token이 없습니다.'
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
             refresh = RefreshToken(refresh_token)
             refresh.blacklist()
+        except TokenError as e:
+            return Response({
+                'error': '로그아웃 중 오류가 발생했습니다.',
+                'detail': f'토큰 블랙리스트 처리 실패: {str(e)}'
+            }, status=status.HTTP_400_BAD_REQUEST)
 
-        # 쿠키에서 jwt 토큰 삭제
-        response = Response({'message': '로그아웃 되었습니다.'}, status=status.HTTP_200_OK)
-        response.delete_cookie('access_token')
-        response.delete_cookie('refresh_token')
+        response = Response({
+            'message': '로그아웃 되었습니다.',
+            'detail': '토큰이 성공적으로 블랙리스트에 추가되었습니다.'
+        }, status=status.HTTP_200_OK)
+        response.delete_cookie('access_token', domain='graduart.gallery')
+        response.delete_cookie('refresh_token', domain='graduart.gallery')
         return response
-    except:
-        return Response({'error': '로그아웃 중 오류가 발생했습니다.'}, status=status.HTTP_400_BAD_REQUEST)
+        
+    except Exception as e:
+        return Response({
+            'error': '로그아웃 중 오류가 발생했습니다.',
+            'detail': str(e)
+        }, status=status.HTTP_400_BAD_REQUEST)
 
 
 # 왜 필요하냐?
