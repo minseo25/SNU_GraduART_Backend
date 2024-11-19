@@ -260,21 +260,16 @@ def logout(request):
                 'detail': 'refresh_token이 없습니다.'
             }, status=status.HTTP_400_BAD_REQUEST)
 
-        try:
-            refresh = RefreshToken(refresh_token)
-            refresh.blacklist()
-        except TokenError as e:
-            return Response({
-                'error': '로그아웃 중 오류가 발생했습니다.',
-                'detail': f'토큰 블랙리스트 처리 실패: {str(e)}'
-            }, status=status.HTTP_400_BAD_REQUEST)
+        # 일단 blacklist 하지 말아봐
+        # refresh = RefreshToken(refresh_token)
+        # refresh.blacklist()
 
         response = Response({
             'message': '로그아웃 되었습니다.',
-            'detail': '토큰이 성공적으로 블랙리스트에 추가되었습니다.'
         }, status=status.HTTP_200_OK)
         response.delete_cookie('access_token')
         response.delete_cookie('refresh_token')
+
         return response
         
     except Exception as e:
