@@ -178,7 +178,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "https://newgraduart-backend.fly.dev",
-    "https://new-gradu-art.vercel.app",
+    "https://graduart.gallery",
 ]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = [
@@ -191,5 +191,5 @@ CORS_ALLOW_HEADERS = [
 ]
 CSRF_TRUSTED_ORIGINS = [
   'https://newgraduart-backend.fly.dev',
-  "https://new-gradu-art.vercel.app",
+  "https://graduart.gallery",
 ]
