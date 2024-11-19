@@ -273,8 +273,8 @@ def logout(request):
             'message': '로그아웃 되었습니다.',
             'detail': '토큰이 성공적으로 블랙리스트에 추가되었습니다.'
         }, status=status.HTTP_200_OK)
-        response.delete_cookie('access_token', domain='graduart.gallery')
-        response.delete_cookie('refresh_token', domain='graduart.gallery')
+        response.delete_cookie('access_token')
+        response.delete_cookie('refresh_token')
         return response
         
     except Exception as e:
