@@ -270,14 +270,10 @@ def logout(request):
         response.delete_cookie(
             'access_token',
             samesite='None',
-            secure=True,
-            httponly=True
         )
         response.delete_cookie(
             'refresh_token',
             samesite='None',
-            secure=True,
-            httponly=True
         )
 
         return response
