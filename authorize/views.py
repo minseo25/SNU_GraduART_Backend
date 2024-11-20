@@ -267,8 +267,18 @@ def logout(request):
         response = Response({
             'message': '로그아웃 되었습니다.',
         }, status=status.HTTP_200_OK)
-        response.delete_cookie('access_token')
-        response.delete_cookie('refresh_token')
+        response.delete_cookie(
+            'access_token',
+            samesite='None',
+            secure=True,
+            httponly=True
+        )
+        response.delete_cookie(
+            'refresh_token',
+            samesite='None',
+            secure=True,
+            httponly=True
+        )
 
         return response
         
