@@ -220,8 +220,8 @@ def logout(request):
             }, status=status.HTTP_400_BAD_REQUEST)
 
         # 토큰을 블랙리스트에 등록함으로써 무효화
-        # refresh = RefreshToken(refresh_token)
-        # refresh.blacklist()
+        refresh = RefreshToken(refresh_token)
+        refresh.blacklist()
 
         response = Response({
             'message': '로그아웃 되었습니다.',
