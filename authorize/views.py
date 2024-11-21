@@ -67,7 +67,6 @@ def google_callback(request):
         access_token = refresh.access_token
         access_token.set_exp(lifetime=settings.SIMPLE_JWT['ACCESS_TOKEN_LIFETIME'])
         
-        # jwt 토큰을 쿠키에 저장, 보안을 위해 파라미터 세팅, max_age 세팅함으로써 browser session 종료 시에도 유지
         response_data = {
             'message': '로그인 되었습니다.',
             'access_token': str(access_token),
@@ -78,10 +77,10 @@ def google_callback(request):
         return Response({'error': f'로그인 중 오류가 발생했습니다'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-@api_view(['GET'])
+@api_view(['POST'])
 @permission_classes([AllowAny])
 def token_refresh(request):
-    refresh_token = request.COOKIES.get('refresh_token')
+    refresh_token = request.data.get('refresh_token')
     if not refresh_token:
         return Response({'error': '리프레시 토큰이 제공되지 않았습니다.'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -91,7 +90,6 @@ def token_refresh(request):
         access_token = refresh.access_token
         access_token.set_exp(lifetime=settings.SIMPLE_JWT['ACCESS_TOKEN_LIFETIME'])
 
-        # jwt 토큰을 쿠키에 저장, 보안을 위해 파라미터 세팅, max_age 세팅함으로써 browser session 종료 시에도 유지
         response_data = {
             'message': '토큰이 갱신되었습니다',
             'access_token': str(access_token),
@@ -161,7 +159,6 @@ def register(request):
             access_token = refresh.access_token
             access_token.set_exp(lifetime=settings.SIMPLE_JWT['ACCESS_TOKEN_LIFETIME'])
 
-            # jwt 토큰을 쿠키에 저장, 보안을 위해 파라미터 세팅, max_age 세팅함으로써 browser session 종료 시에도 유지
             response_data = {
                 'message': '회원가입 되었습니다.',
                 'access_token': str(access_token),
@@ -199,7 +196,6 @@ def login(request):
         access_token = refresh.access_token
         access_token.set_exp(lifetime=settings.SIMPLE_JWT['ACCESS_TOKEN_LIFETIME'])
 
-        # jwt 토큰을 쿠키에 저장, 보안을 위해 파라미터 세팅, max_age 세팅함으로써 browser session 종료 시에도 유지
         response_data = {
             'message': '로그인 되었습니다.',
             'access_token': str(access_token),
