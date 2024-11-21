@@ -205,10 +205,10 @@ def login(request):
     except:
         return Response({'error': f'로그인 중 오류가 발생했습니다'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-@api_view(['GET'])
+@api_view(['POST'])
 def logout(request):
     try:
-        refresh_token = request.COOKIES.get('refresh_token')
+        refresh_token = request.data.get('refresh_token')
         if not refresh_token:
             return Response({
                 'error': '로그아웃 중 오류가 발생했습니다.',
@@ -219,11 +219,9 @@ def logout(request):
         refresh = RefreshToken(refresh_token)
         refresh.blacklist()
 
-        response = Response({
+        return Response({
             'message': '로그아웃 되었습니다.',
         }, status=status.HTTP_200_OK)
-
-        return response
         
     except Exception as e:
         return Response({
