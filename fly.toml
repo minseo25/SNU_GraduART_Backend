@@ -29,7 +29,6 @@ console_command = '/code/manage.py shell'
   guest_path = '/code/static'
   url_prefix = '/static/'
 
-[[mounts]]
-  processes = ["app"]
-  source = "data_volume"
-  destination = "/data"
+[mounts]
+  source="data_volume"
+  destination="/data"
