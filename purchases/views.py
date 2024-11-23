@@ -75,7 +75,7 @@ def get_purchase_detail(request, item_id):
         user_id = request.user.user_id
         item_id = str(item_id)
 
-        purchase = supabase.table('purchased').select('order_id').eq('user_id', user_id).eq('item_id', item_id).execute()
+        purchase = supabase.table('purchased').select('order_id, created_at').eq('user_id', user_id).eq('item_id', item_id).execute()
 
         if not purchase.data:
             return Response({'error': '구매 내역을 찾을 수 없습니다'}, status=status.HTTP_404_NOT_FOUND)
