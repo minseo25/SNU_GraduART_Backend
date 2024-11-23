@@ -17,6 +17,8 @@ def request_refund(request):
         user_id = request.user.user_id
         item_id = request.data.get('item_id')
         reason = request.data.get('reason')
+        if not reason:
+            reason = "입력한 사유 없음"
 
         # 구매내역 조회
         purchased = supabase.table('purchased').select('*').eq('user_id', user_id).eq('item_id', item_id).execute()
@@ -78,7 +80,7 @@ def request_refund(request):
         server.sendmail(sender, recipient, msg.as_string())
         server.quit()
     except Exception as e:
-        return Response({'error': f'관리자 이메일 전송 중 오류가 발생했습니다. {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response({'error': f'관리자 이메일 전송 중 오류가 발생했습니다.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
     try:
         # refund_request 테이블에 환불 요청 정보 저장 => 이 테이블은 관리자가 환불 요청을 확인할 때 사용 (슬랙 알림 등 연결 가능)
