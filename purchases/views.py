@@ -82,7 +82,7 @@ def get_purchase_detail(request, item_id):
         
         # 추가적인 주문 정보 리턴
         order_id = purchase.data[0]['order_id']
-        order_info = supabase.table('order_info').select('address', 'name', 'phone_num', 'email', 'payment_method', 'total_price').eq('order_id', order_id).execute()
+        order_info = supabase.table('order_info').select('address, name, phone_num, email, payment_method, total_price').eq('order_id', order_id).execute()
 
         # 결과 재구성
         order_info = order_info.data[0] if order_info.data else {}

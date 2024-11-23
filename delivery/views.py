@@ -23,7 +23,7 @@ def get_delivery_status(request, item_id):
   
     # 운송장 번호 가져오기
     purchased_id = purchased_info.data[0]["id"]
-    delivery_info = supabase.table("delivery").select("tracking_num", "courier_name").eq("purchased_id", purchased_id).execute()
+    delivery_info = supabase.table("delivery").select("tracking_num, courier_name").eq("purchased_id", purchased_id).execute()
     tracking_num = delivery_info.data[0]["tracking_num"]
     courier_name = delivery_info.data[0]["courier_name"]
 
