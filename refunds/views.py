@@ -79,7 +79,7 @@ def request_refund(request):
         server.login(settings.EMAIL_HOST_USER, settings.EMAIL_HOST_PASSWORD)
         server.sendmail(sender, recipient, msg.as_string())
         server.quit()
-    except Exception as e:
+    except:
         return Response({'error': f'관리자 이메일 전송 중 오류가 발생했습니다.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
     try:
