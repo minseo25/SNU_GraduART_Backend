@@ -4,7 +4,6 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.conf import settings
 from supabase import create_client, Client
-from django.utils import timezone
 
 # Supabase 클라이언트 설정
 supabase: Client = create_client(settings.SUPABASE_URL, settings.SUPABASE_KEY)
@@ -33,4 +32,4 @@ def get_delivery_status(request, item_id):
     return Response({"redirect_url": redirect_url}, status=status.HTTP_200_OK)
 
   except:
-    return Response("error: 배송 조회 실패", status=status.HTTP_400_BAD_REQUEST)
+    return Response("error: 운송장 번호가 아직 등록되지 않았습니다.", status=status.HTTP_400_BAD_REQUEST)
