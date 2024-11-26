@@ -48,7 +48,7 @@ def request_refund(request):
         전화번호: {order_info.data[0]['phone_num']}
         이메일: {order_info.data[0]['email']}
         ---------------------------------------------
-        주문 날짜: {datetime.fromisoformat(purchased.data[0]['created_at'].replace('Z', '+00:00')).astimezone(timezone.get_current_timezone()).strftime('%Y-%m-%d %H:%M:%S')}
+        주문 날짜: {datetime.fromisoformat(purchased.data[0]['created_at']).strftime('%Y-%m-%d %H:%M:%S')}
         결제 방법: {order_info.data[0]['payment_method']}
         주문 ID: {order_id}
         총 가격: {order_info.data[0]['total_price']}
