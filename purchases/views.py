@@ -39,7 +39,8 @@ def get_purchases(request):
 
         for record in purchased.data:
             created_at_datetime = datetime.fromisoformat(record["created_at"])
-            if timezone.now() - timezone.make_aware(created_at_datetime) >= two_weeks:
+            now_datetime = timezone.now().astimezone()
+            if now_datetime - created_at_datetime >= two_weeks:
                 item_id = record["item_id"]
                 record["is_confirmed"] = True
                 supabase.table("purchased").update({"is_confirmed" : True}).eq("item_id", item_id).execute()
