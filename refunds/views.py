@@ -41,7 +41,7 @@ def request_refund(request):
             return Response({'error': '상품 정보가 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)
 
         # 이메일 전송 포맷
-        subject = f"[GraduArt] 환불 요청 - {timezone.localtime().strftime('%Y-%m-%d %H:%M:%S')}"
+        subject = f"[GraduArt] 환불 요청 - {timezone.now().strftime('%Y-%m-%d %H:%M:%S')}"
         body = f"""
         사용자 ID: {user_id}
         사용자명: {order_info.data[0]['name']}
@@ -87,7 +87,7 @@ def request_refund(request):
         refund_info = {
             'user_id': user_id,
             'item_id': item_id,
-            'created_at': timezone.localtime().isoformat(),
+            'created_at': timezone.now().isoformat(),
             'order_id': order_id,
             'reason': reason,
         }
