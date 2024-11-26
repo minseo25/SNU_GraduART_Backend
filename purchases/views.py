@@ -227,7 +227,7 @@ def approve_purchase(request):
                 'order_id': oid,
                 'user_id': user_id,
                 'item_id': item_id,
-                'created_at': timezone.localtime().isoformat(timespec='milliseconds') + '+09:00',
+                'created_at': timezone.localtime().isoformat(),
                 'refund': False,
                 'is_confirmed': False,
             }).execute()

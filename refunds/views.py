@@ -87,7 +87,7 @@ def request_refund(request):
         refund_info = {
             'user_id': user_id,
             'item_id': item_id,
-            'created_at': timezone.localtime().isoformat(timespec='milliseconds') + '+09:00',
+            'created_at': timezone.localtime().isoformat(),
             'order_id': order_id,
             'reason': reason,
         }
